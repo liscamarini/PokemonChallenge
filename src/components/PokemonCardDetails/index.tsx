@@ -5,6 +5,18 @@ import Icon from 'react-native-vector-icons/Feather';
 import api from '../../services/api';
 import {
   Container,
+  PokemonEvolutionContainer,
+  PokemonDetails,
+  PokemonWeight,
+  PokemonWeightText,
+  PokemonHight,
+  PokemonHightText,
+  PokemonStats,
+  Stats,
+  HP,
+  DEF,
+  ATK,
+  SPD,
   ContainerPokemon,
   NumberText,
   PokeImage,
@@ -53,6 +65,25 @@ const PokemonCardDetails: React.FC<Pokemon> = ({
           </NumberText>
           <PokeImage source={{ uri: pokeImg }} />
         </ContainerPokemon>
+        <PokemonName>{name}</PokemonName>
+
+        <PokemonDetails>
+          <PokemonWeight>KG</PokemonWeight>
+          <PokemonWeightText>Weight</PokemonWeightText>
+        </PokemonDetails>
+
+        <PokemonDetails>
+          <PokemonHight>M</PokemonHight>
+          <PokemonHightText>Hight</PokemonHightText>
+        </PokemonDetails>
+
+        <PokemonStats>Stats</PokemonStats>
+        <Stats>
+          <HP>HP</HP>
+          <ATK>ATK</ATK>
+          <DEF>DEF</DEF>
+          <SPD>SPD</SPD>
+        </Stats>
       </PokemonEvolutionContainer>
 
       <PokemonFamilyContainer>

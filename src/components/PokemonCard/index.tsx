@@ -30,17 +30,17 @@ const PokemonCard: React.FC<Pokemon> = ({
 }) => {
   const [types, setTypes] = useState<Pokemon[]>([]);
 
-  const loadTypes = useCallback(() => {
-    api.get(`/pokemon/${pokemonId}/`).then(response => {
-      setTypes(response.data.results);
-    });
-  }, [pokemonId]);
+  // const loadTypes = useCallback(() => {
+  //   api.get(`/pokemon/${pokemonId}/`).then(response => {
+  //     setTypes(response.data.results);
+  //   });
+  // }, [pokemonId]);
 
-  console.log('type', types);
+  // console.log('type', types);
 
-  useEffect(() => {
-    loadTypes();
-  }, [loadTypes]);
+  // useEffect(() => {
+  //   loadTypes();
+  // }, [loadTypes]);
 
   return (
     <Container {...rest}>

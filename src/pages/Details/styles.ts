@@ -1,4 +1,6 @@
+import { FlatList } from 'react-native';
 import styled from 'styled-components/native';
+import { Pokemon } from '.';
 
 export const Container = styled.View`
   flex: 1;
@@ -39,4 +41,8 @@ export const ButtonBackText = styled.Text`
   margin-left: 6px;
   margin-top: -5px;
   color: #ff9000;
+`;
+
+export const DetailsList = styled(FlatList as new () => FlatList<Pokemon>)`
+  padding: 10px 20px 10px;
 `;

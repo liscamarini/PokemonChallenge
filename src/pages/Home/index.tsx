@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable prettier/prettier */
 import React, { useCallback, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
@@ -29,7 +27,7 @@ export interface Pokemon {
 let pokemonIndex = 1;
 
 const Home: React.FC<Pokemon> = () => {
-  const navigation  = useNavigation();
+  const navigation = useNavigation();
 
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
@@ -52,24 +50,33 @@ const Home: React.FC<Pokemon> = () => {
 
   // console.log('pokemon', pokemons);
 
-  const navigateToDetails = useCallback((pokemonId) => {
-    const { pokeIndex } = pokemonId;
-    navigation.navigate('Details', {pokemonId: pokeIndex});
+  const navigateToDetails = useCallback(
+    pokemonId => {
+      const { pokeIndex } = pokemonId;
+      navigation.navigate('Details', { pokemonId: pokeIndex });
     },
-    [navigation]
+    [navigation],
   );
 
-  const renderItem = useCallback(({ item }) => {
-    const { url } = item;
-    const pokeIndex = url.split('/')[url.split('/').length - 2];
-    const imageUrl = `https://pokeres.bastionbot.org/images/pokemon/${pokeIndex}.png`;
+  const renderItemPokemon = useCallback(
+    ({ item }) => {
+      const { url } = item;
+      const pokeIndex = url.split('/')[url.split('/').length - 2];
+      const imageUrl = `https://pokeres.bastionbot.org/images/pokemon/${pokeIndex}.png`;
 
-    return (
-      <PokemonListContainer onPress={() => navigateToDetails(pokeIndex)}>
-        <PokemonCard pokemonId={pokeIndex} pokeImg={imageUrl} name={item.name} types={item.types} />
-      </PokemonListContainer>
-    );
-  }, [navigateToDetails]);
+      return (
+        <PokemonListContainer onPress={() => navigateToDetails(pokeIndex)}>
+          <PokemonCard
+            pokemonId={pokeIndex}
+            pokeImg={imageUrl}
+            name={item.name}
+            types={item.types}
+          />
+        </PokemonListContainer>
+      );
+    },
+    [navigateToDetails],
+  );
 
   return (
     <Container>
@@ -89,7 +96,7 @@ const Home: React.FC<Pokemon> = () => {
         data={pokemons}
         extraData={pokemonIndex}
         refreshing
-        renderItem={renderItem}
+        renderItem={renderItemPokemon}
         keyExtractor={(item: Pokemon) => item.name}
       />
     </Container>
