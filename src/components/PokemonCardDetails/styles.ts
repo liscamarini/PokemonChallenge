@@ -12,89 +12,93 @@ export const PokemonEvolutionContainer = styled.View`
   height: 444px;
   background: #3e3b47;
   border-radius: 8px;
-`;
-
-export const ContainerPokemon = styled.View`
-  flex-direction: row;
-  margin-right: 16px;
+  padding: 16px 32px 16px;
 `;
 
 export const NumberText = styled.Text`
   font-family: 'Roboto-Medium';
   font-size: 24px;
   color: #666360;
-  margin-top: 16px;
   margin-right: 26px;
 `;
 export const PokeImage = styled.Image`
-  position: relative;
-  width: 180px;
-  height: 180px;
+  width: 101px;
+  height: 102px;
 `;
 
 export const PokemonDetails = styled.View`
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
 `;
-export const PokemonWeight = styled.View`
-  width: 89px;
-  height: 32px;
+export const PokemonDetailsWeight = styled.View`
   flex-direction: column;
+  margin-right: 10px;
+`;
+export const PokemonWeight = styled.Text`
+  font-family: 'Roboto-Regular';
+  font-size: 24px;
+  text-align: center;
+  color: #f4ede8;
+`;
+export const PokemonDetailsHight = styled.View`
+  flex-direction: column;
+  margin-left: 10px;
 `;
 export const PokemonWeightText = styled.Text`
   font-family: 'Roboto-Regular';
+  font-size: 16px;
+  text-align: center;
+  color: #666360;
+  margin-left: 10px;
+`;
+export const PokemonHight = styled.Text`
+  font-family: 'Roboto-Regular';
   font-size: 24px;
-  line-height: 32px;
   text-align: center;
   color: #f4ede8;
-`;
-export const PokemonHight = styled.View`
-  width: 89px;
-  height: 32px;
-  flex-direction: column;
 `;
 export const PokemonHightText = styled.Text`
   font-family: 'Roboto-Regular';
-  font-size: 24px;
-  line-height: 32px;
+  font-size: 16px;
   text-align: center;
-  color: #f4ede8;
+  color: #666360;
 `;
 
-export const PokemonStats = styled.View``;
-export const Stats = styled.Text`
+export const PokemonStats = styled.Text`
   font-family: 'Roboto-Medium';
   font-size: 20px;
   line-height: 26px;
   text-align: center;
-
+  margin-top: 10px;
   color: #f4ede8;
+`;
+export const Stats = styled.View`
+  margin-top: 5px;
 `;
 export const HP = styled.Text`
   font-family: 'Roboto-Regular';
   font-size: 16px;
-  text-align: center;
-
+  margin-top: 10px;
   color: #f4ede8;
 `;
 export const DEF = styled.Text`
   font-family: 'Roboto-Regular';
   font-size: 16px;
-  text-align: center;
-
+  margin-top: 10px;
   color: #f4ede8;
 `;
 export const ATK = styled.Text`
   font-family: 'Roboto-Regular';
   font-size: 16px;
-  text-align: center;
-
+  margin-top: 10px;
   color: #f4ede8;
 `;
 export const SPD = styled.Text`
   font-family: 'Roboto-Regular';
   font-size: 16px;
-  text-align: center;
-
+  margin-top: 10px;
   color: #f4ede8;
 `;
 
@@ -115,6 +119,8 @@ export const PokemonName = styled.Text`
   font-family: 'Roboto-Medium';
   font-size: 24px;
   color: #f99000;
+  text-align: center;
+  margin-top: 16px;
 `;
 
 export const PokemonTypes = styled.Text`

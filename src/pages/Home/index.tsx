@@ -20,11 +20,8 @@ import api from '../../services/api';
 export interface Pokemon {
   pokemonId: number;
   name: string;
-  img: string;
+  pokeImg: string;
 }
-
-// eslint-disable-next-line prefer-const
-let pokemonIndex = 1;
 
 const Home: React.FC<Pokemon> = () => {
   const navigation = useNavigation();
@@ -51,27 +48,22 @@ const Home: React.FC<Pokemon> = () => {
   // console.log('pokemon', pokemons);
 
   const navigateToDetails = useCallback(
-    pokemonId => {
-      const { pokeIndex } = pokemonId;
-      navigation.navigate('Details', { pokemonId: pokeIndex });
+    pokeId => {
+      const { pokemonId } = pokeId;
+      navigation.navigate('Details', { pokeId: pokemonId });
     },
     [navigation],
   );
 
   const renderItemPokemon = useCallback(
     ({ item }) => {
-      const { url } = item;
-      const pokeIndex = url.split('/')[url.split('/').length - 2];
-      const imageUrl = `https://pokeres.bastionbot.org/images/pokemon/${pokeIndex}.png`;
+      const { url, name } = item;
+      const pokeId = url.split('/')[url.split('/').length - 2];
+      const imageUrl = `https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`;
 
       return (
-        <PokemonListContainer onPress={() => navigateToDetails(pokeIndex)}>
-          <PokemonCard
-            pokemonId={pokeIndex}
-            pokeImg={imageUrl}
-            name={item.name}
-            types={item.types}
-          />
+        <PokemonListContainer onPress={() => navigateToDetails(pokeId)}>
+          <PokemonCard pokemonId={pokeId} pokeImg={imageUrl} name={name} />
         </PokemonListContainer>
       );
     },
@@ -94,7 +86,6 @@ const Home: React.FC<Pokemon> = () => {
 
       <PokemonList
         data={pokemons}
-        extraData={pokemonIndex}
         refreshing
         renderItem={renderItemPokemon}
         keyExtractor={(item: Pokemon) => item.name}

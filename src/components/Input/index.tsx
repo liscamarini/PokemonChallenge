@@ -8,7 +8,7 @@ interface InputProps extends TextInputProps {
   value: string;
 }
 
-const Input: React.FC<InputProps> = ({ icon, value = ' ' }: InputProps) => {
+const Input: React.FC<InputProps> = ({ icon, value = '' }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 

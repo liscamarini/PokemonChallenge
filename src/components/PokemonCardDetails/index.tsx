@@ -1,14 +1,15 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState, useCallback } from 'react';
+import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import api from '../../services/api';
 import {
   Container,
   PokemonEvolutionContainer,
   PokemonDetails,
+  PokemonDetailsWeight,
   PokemonWeight,
   PokemonWeightText,
+  PokemonDetailsHight,
   PokemonHight,
   PokemonHightText,
   PokemonStats,
@@ -17,7 +18,6 @@ import {
   DEF,
   ATK,
   SPD,
-  ContainerPokemon,
   NumberText,
   PokeImage,
   PokemonFamilyContainer,
@@ -32,49 +32,38 @@ interface Pokemon {
   pokemonId: number;
   name: string;
   pokeImg: string;
-  types: string;
 }
 
 const PokemonCardDetails: React.FC<Pokemon> = ({
   pokemonId,
   pokeImg,
   name,
-  ...rest
-}) => {
+}: Pokemon) => {
   const [types, setTypes] = useState<Pokemon[]>([]);
 
-  const loadTypes = useCallback(() => {
-    api.get(`/pokemon/${pokemonId}/`).then(response => {
-      setTypes(response.data.results);
-    });
-  }, [pokemonId]);
-
-  console.log('type', types);
-
-  useEffect(() => {
-    loadTypes();
-  }, [loadTypes]);
-
   return (
-    <Container {...rest}>
+    <Container>
       <PokemonEvolutionContainer>
-        <ContainerPokemon>
+        <View style={{ flexDirection: 'row' }}>
           <NumberText>
             <Icon name="hash" size={24} color="#666360" />
             {pokemonId}
           </NumberText>
+
           <PokeImage source={{ uri: pokeImg }} />
-        </ContainerPokemon>
+        </View>
         <PokemonName>{name}</PokemonName>
 
         <PokemonDetails>
-          <PokemonWeight>KG</PokemonWeight>
-          <PokemonWeightText>Weight</PokemonWeightText>
-        </PokemonDetails>
+          <PokemonDetailsWeight>
+            <PokemonWeight>KG</PokemonWeight>
+            <PokemonWeightText>Weight</PokemonWeightText>
+          </PokemonDetailsWeight>
 
-        <PokemonDetails>
-          <PokemonHight>M</PokemonHight>
-          <PokemonHightText>Hight</PokemonHightText>
+          <PokemonDetailsHight>
+            <PokemonHight>M</PokemonHight>
+            <PokemonHightText>Hight</PokemonHightText>
+          </PokemonDetailsHight>
         </PokemonDetails>
 
         <PokemonStats>Stats</PokemonStats>
@@ -87,13 +76,11 @@ const PokemonCardDetails: React.FC<Pokemon> = ({
       </PokemonEvolutionContainer>
 
       <PokemonFamilyContainer>
-        <ContainerPokemon>
-          <NumberText>
-            <Icon name="hash" size={24} color="#666360" />
-            {pokemonId}
-          </NumberText>
-          <PokeImage source={{ uri: pokeImg }} />
-        </ContainerPokemon>
+        <NumberText>
+          <Icon name="hash" size={24} color="#666360" />
+          {pokemonId}
+        </NumberText>
+        <PokeImage source={{ uri: pokeImg }} />
 
         <PokemonTextContainer>
           <PokemonTitle>Name: </PokemonTitle>

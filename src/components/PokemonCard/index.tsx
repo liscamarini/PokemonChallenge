@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState, useCallback } from 'react';
 import Icon from 'react-native-vector-icons/Feather';
 import api from '../../services/api';
@@ -19,31 +17,36 @@ interface Pokemon {
   pokemonId: number;
   name: string;
   pokeImg: string;
-  types: string;
+}
+
+interface TypesPokemon {
+  types: {
+    name: string;
+    url: string;
+  };
 }
 
 const PokemonCard: React.FC<Pokemon> = ({
   pokemonId,
   pokeImg,
   name,
-  ...rest
-}) => {
-  const [types, setTypes] = useState<Pokemon[]>([]);
+}: Pokemon) => {
+  const [types, setTypes] = useState<TypesPokemon[]>([]);
 
-  // const loadTypes = useCallback(() => {
-  //   api.get(`/pokemon/${pokemonId}/`).then(response => {
-  //     setTypes(response.data.results);
-  //   });
-  // }, [pokemonId]);
+  const loadTypes = useCallback(() => {
+    api.get(`/pokemon/${types}/`).then(response => {
+      setTypes(response.data.damage_relations);
+    });
+  }, [types]);
 
-  // console.log('type', types);
+  console.log('type', types);
 
-  // useEffect(() => {
-  //   loadTypes();
-  // }, [loadTypes]);
+  useEffect(() => {
+    loadTypes();
+  }, [loadTypes]);
 
   return (
-    <Container {...rest}>
+    <Container>
       <ContainerPokemon>
         <NumberText>
           <Icon name="hash" size={24} color="#666360" />

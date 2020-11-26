@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
@@ -26,21 +26,23 @@ export interface Pokemon {
 
 const Details: React.FC<Pokemon> = ({ pokemonId }: Pokemon) => {
   const navigation = useNavigation();
+  const route = useRoute();
 
   const [pokeEvolution, setPokeEvolution] = useState<Pokemon[]>([]);
 
   const loadDetail = useCallback(() => {
     api
-      .get(`pokemon/${pokemonId}/`)
+      .get(`pokemon/${pokeEvolution}/`)
       .then(response => {
         setPokeEvolution(response.data.results);
       })
       .catch(error => {
         Alert.alert('Error', `${error}`);
       });
-  }, [pokemonId]);
+  }, [pokeEvolution]);
 
   useEffect(() => {
+    // const pokeId = route.params;
     loadDetail();
   }, [loadDetail]);
 
@@ -56,7 +58,6 @@ const Details: React.FC<Pokemon> = ({ pokemonId }: Pokemon) => {
         pokemonId={pokeIndex}
         pokeImg={imageUrl}
         name={item.name}
-        types={item.types}
       />
     );
   }, []);
@@ -75,7 +76,6 @@ const Details: React.FC<Pokemon> = ({ pokemonId }: Pokemon) => {
 
       <DetailsList
         data={pokeEvolution}
-        refreshing
         renderItem={renderItemDetails}
         keyExtractor={(item: Pokemon) => item.name}
       />

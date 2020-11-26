@@ -19,7 +19,6 @@ export const NumberText = styled.Text`
   margin-right: 26px;
 `;
 export const PokeImage = styled.Image`
-  position: relative;
   width: 180px;
   height: 180px;
 `;
