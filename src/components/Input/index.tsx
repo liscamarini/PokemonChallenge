@@ -6,9 +6,14 @@ import { Container, Icon, TextInput } from './styles';
 interface InputProps extends TextInputProps {
   icon: string;
   value: string;
+  onChangeText(value: string): void;
 }
 
-const Input: React.FC<InputProps> = ({ icon, value = '' }: InputProps) => {
+const Input: React.FC<InputProps> = ({
+  icon,
+  value = '',
+  onChangeText,
+}: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
@@ -34,6 +39,7 @@ const Input: React.FC<InputProps> = ({ icon, value = '' }: InputProps) => {
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
         value={value}
+        onChangeText={onChangeText}
       />
     </Container>
   );

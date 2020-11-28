@@ -12,7 +12,7 @@ const Routes: React.FC = () => (
       headerShown: false,
       cardStyle: { backgroundColor: '#312e38' },
     }}
-    initialRouteName="Details"
+    // initialRouteName="Details"
   >
     <App.Screen name="Home" component={Home} />
     <App.Screen name="Details" component={Details} />

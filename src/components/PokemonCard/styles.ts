@@ -39,14 +39,3 @@ export const PokemonName = styled.Text`
   font-size: 24px;
   color: #f99000;
 `;
-
-export const PokemonTypes = styled.Text`
-  font-family: 'Roboto-Regular';
-  font-size: 24px;
-  color: #f4ede8;
-`;
-export const PokemonText = styled.Text`
-  font-family: 'Roboto-Medium';
-  font-size: 24px;
-  color: #f99000;
-`;

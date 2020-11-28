@@ -31,7 +31,7 @@ export const Title = styled.Text`
 export const ButtonBack = styled.TouchableOpacity`
   flex-direction: row;
 
-  margin-top: 28px;
+  margin-top: 18px;
   margin-left: 10px;
 `;
 

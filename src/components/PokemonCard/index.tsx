@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Icon from 'react-native-vector-icons/Feather';
-import api from '../../services/api';
+
 import {
   Container,
   ContainerPokemon,
@@ -9,8 +9,6 @@ import {
   PokemonTextContainer,
   PokemonTitle,
   PokemonName,
-  PokemonTypes,
-  PokemonText,
 } from './styles';
 
 interface Pokemon {
@@ -19,32 +17,11 @@ interface Pokemon {
   pokeImg: string;
 }
 
-interface TypesPokemon {
-  types: {
-    name: string;
-    url: string;
-  };
-}
-
 const PokemonCard: React.FC<Pokemon> = ({
   pokemonId,
   pokeImg,
   name,
 }: Pokemon) => {
-  const [types, setTypes] = useState<TypesPokemon[]>([]);
-
-  const loadTypes = useCallback(() => {
-    api.get(`/pokemon/${types}/`).then(response => {
-      setTypes(response.data.damage_relations);
-    });
-  }, [types]);
-
-  console.log('type', types);
-
-  useEffect(() => {
-    loadTypes();
-  }, [loadTypes]);
-
   return (
     <Container>
       <ContainerPokemon>
@@ -58,11 +35,6 @@ const PokemonCard: React.FC<Pokemon> = ({
       <PokemonTextContainer>
         <PokemonTitle>Name: </PokemonTitle>
         <PokemonName>{name}</PokemonName>
-      </PokemonTextContainer>
-
-      <PokemonTextContainer>
-        <PokemonTypes>Type: </PokemonTypes>
-        <PokemonText>{types}</PokemonText>
       </PokemonTextContainer>
     </Container>
   );

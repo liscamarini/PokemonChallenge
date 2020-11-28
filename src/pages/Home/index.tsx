@@ -32,12 +32,34 @@ const Home: React.FC<Pokemon> = () => {
 
   const loadPokemon = useCallback(() => {
     api
-      .get(`/pokemon/${searchPokemon}/`)
+      .get(`pokemon/${searchPokemon}`)
       .then(response => {
         setPokemons(response.data.results);
+        // if (response.data.result) {
+        //   setPokemons(
+        //     response.data.results.map(item => {
+        //       return (
+        //         item.pokemonId,
+        //         item.name,
+        //         item.pokeImg
+        //       ),
+        //     })
+
+        //   return;
+        // }
+
+        // setPokemons([
+        //   {
+        //     name: 'bulbasaur',
+        //     pokeImg: 'https://pokeapi.co/api/v2/pokemon/idPokemon/',
+        //     pokemonId: 11,
+        //   },
+        // ]);
+
+        console.log(response.data);
       })
-      .catch(error => {
-        Alert.alert('Error', `${error}`);
+      .catch(() => {
+        setPokemons([]);
       });
   }, [searchPokemon]);
 
