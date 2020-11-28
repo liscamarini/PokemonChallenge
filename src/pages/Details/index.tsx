@@ -26,7 +26,6 @@ export interface Pokemon {
 
 const Details: React.FC<Pokemon> = ({ pokemonId }: Pokemon) => {
   const navigation = useNavigation();
-  const route = useRoute();
 
   const [pokeEvolution, setPokeEvolution] = useState<Pokemon[]>([]);
 
@@ -42,11 +41,8 @@ const Details: React.FC<Pokemon> = ({ pokemonId }: Pokemon) => {
   }, [pokeEvolution]);
 
   useEffect(() => {
-    // const pokeId = route.params;
     loadDetail();
   }, [loadDetail]);
-
-  console.log('details', pokeEvolution);
 
   const renderItemDetails = useCallback(({ item }) => {
     const { url } = item;

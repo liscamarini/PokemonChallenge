@@ -28,46 +28,36 @@ const Home: React.FC<Pokemon> = () => {
 
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
+  const [data, setData] = useState<Pokemon[]>([]);
   const [searchPokemon, setSearchPokemon] = useState('');
 
   const loadPokemon = useCallback(() => {
     api
-      .get(`pokemon/${searchPokemon}`)
+      .get('pokemon?limit=1117&offset=0')
       .then(response => {
         setPokemons(response.data.results);
-        // if (response.data.result) {
-        //   setPokemons(
-        //     response.data.results.map(item => {
-        //       return (
-        //         item.pokemonId,
-        //         item.name,
-        //         item.pokeImg
-        //       ),
-        //     })
-
-        //   return;
-        // }
-
-        // setPokemons([
-        //   {
-        //     name: 'bulbasaur',
-        //     pokeImg: 'https://pokeapi.co/api/v2/pokemon/idPokemon/',
-        //     pokemonId: 11,
-        //   },
-        // ]);
-
-        console.log(response.data);
+        setData(response.data.results);
       })
       .catch(() => {
         setPokemons([]);
       });
-  }, [searchPokemon]);
+  }, []);
 
   useEffect(() => {
     loadPokemon();
   }, [loadPokemon]);
 
-  // console.log('pokemon', pokemons);
+  const handleSearch = useCallback(
+    value => {
+      setSearchPokemon(value);
+
+      const filteredPokemons = pokemons.filter(poke =>
+        poke.name.match(new RegExp(`^${searchPokemon}`, 'gi')),
+      );
+      setData(filteredPokemons);
+    },
+    [searchPokemon, pokemons],
+  );
 
   const navigateToDetails = useCallback(
     pokeId => {
@@ -102,12 +92,12 @@ const Home: React.FC<Pokemon> = () => {
       <Input
         value={searchPokemon}
         icon="search"
-        onChangeText={value => setSearchPokemon(value)}
+        onChangeText={value => handleSearch(value)}
         placeholder="Type the Pokémon name"
       />
 
       <PokemonList
-        data={pokemons}
+        data={data}
         refreshing
         renderItem={renderItemPokemon}
         keyExtractor={(item: Pokemon) => item.name}
