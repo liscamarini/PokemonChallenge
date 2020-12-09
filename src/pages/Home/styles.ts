@@ -41,3 +41,36 @@ export const PokemonListContainer = styled.TouchableOpacity`
   border-radius: 8px;
   margin-top: 16px;
 `;
+export const ContainerPokemon = styled.View`
+  flex-direction: row;
+  margin-right: 16px;
+`;
+
+export const NumberText = styled.Text`
+  font-family: 'Roboto-Medium';
+  font-size: 24px;
+  color: #666360;
+  margin-top: 16px;
+  margin-right: 26px;
+`;
+export const PokeImage = styled.Image`
+  width: 180px;
+  height: 180px;
+`;
+export const PokemonNameContainer = styled.View`
+  flex-direction: row;
+  margin-top: 16px;
+`;
+
+export const PokemonName = styled.Text`
+  font-family: 'Roboto-Regular';
+  font-size: 24px;
+  color: #f4ede8;
+  margin-right: 10px;
+  margin-left: 10px;
+`;
+export const PokemonNameText = styled.Text`
+  font-family: 'Roboto-Medium';
+  font-size: 24px;
+  color: #f99000;
+`;
