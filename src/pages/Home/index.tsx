@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Alert } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Feather';
 import {
   Container,
   Header,
@@ -9,16 +9,21 @@ import {
   Title,
   PokemonList,
   PokemonListContainer,
+  ContainerPokemon,
+  NumberText,
+  PokeImage,
+  PokemonName,
+  PokemonNameContainer,
+  PokemonNameText,
 } from './styles';
 import logoImg from '../../assets/logo.png';
 
 import Input from '../../components/Input';
-import PokemonCard from '../../components/PokemonCard';
 
 import api from '../../services/api';
 
 export interface Pokemon {
-  pokemonId: number;
+  pokeId: number;
   name: string;
   pokeImg: string;
 }
@@ -28,58 +33,49 @@ const Home: React.FC<Pokemon> = () => {
 
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
-  const [data, setData] = useState<Pokemon[]>([]);
   const [searchPokemon, setSearchPokemon] = useState('');
 
   const loadPokemon = useCallback(() => {
     api
-      .get('pokemon?limit=1117&offset=0')
+      .get(`pokemon/${searchPokemon}`)
       .then(response => {
-        setPokemons(response.data.results);
-        setData(response.data.results);
+        const pokeData = response.data.results;
+        if (pokeData) {
+          const pokemonList = pokeData.map((poke: any, id: number) => ({
+            name: poke.name,
+            pokeId: id + 1,
+            pokeImg: `https://pokeres.bastionbot.org/images/pokemon/${
+              id + 1
+            }.png`,
+          }));
+
+          setPokemons(pokemonList);
+        } else {
+          const pokeFakeList = [
+            {
+              name: response.data.name,
+              pokeId: response.data.id,
+              pokeImg: `https://pokeres.bastionbot.org/images/pokemon/${response.data.id}.png`,
+            },
+          ];
+
+          setPokemons(pokeFakeList);
+        }
       })
       .catch(() => {
         setPokemons([]);
       });
-  }, []);
+  }, [searchPokemon]);
 
   useEffect(() => {
     loadPokemon();
   }, [loadPokemon]);
 
-  const handleSearch = useCallback(
-    value => {
-      setSearchPokemon(value);
-
-      const filteredPokemons = pokemons.filter(poke =>
-        poke.name.match(new RegExp(`^${searchPokemon}`, 'gi')),
-      );
-      setData(filteredPokemons);
-    },
-    [searchPokemon, pokemons],
-  );
-
   const navigateToDetails = useCallback(
     pokeId => {
-      const { pokemonId } = pokeId;
-      navigation.navigate('Details', { pokeId: pokemonId });
+      navigation.navigate('Details', { pokeId });
     },
     [navigation],
-  );
-
-  const renderItemPokemon = useCallback(
-    ({ item }) => {
-      const { url, name } = item;
-      const pokeId = url.split('/')[url.split('/').length - 2];
-      const imageUrl = `https://pokeres.bastionbot.org/images/pokemon/${pokeId}.png`;
-
-      return (
-        <PokemonListContainer onPress={() => navigateToDetails(pokeId)}>
-          <PokemonCard pokemonId={pokeId} pokeImg={imageUrl} name={name} />
-        </PokemonListContainer>
-      );
-    },
-    [navigateToDetails],
   );
 
   return (
@@ -92,15 +88,32 @@ const Home: React.FC<Pokemon> = () => {
       <Input
         value={searchPokemon}
         icon="search"
-        onChangeText={value => handleSearch(value)}
+        onChangeText={value => setSearchPokemon(value)}
         placeholder="Type the Pokémon name"
       />
 
       <PokemonList
-        data={data}
+        data={pokemons}
         refreshing
-        renderItem={renderItemPokemon}
-        keyExtractor={(item: Pokemon) => item.name}
+        keyExtractor={pokemon => pokemon.name}
+        renderItem={({ item: pokemon }) => (
+          <PokemonListContainer
+            onPress={() => navigateToDetails(pokemon.pokeId)}
+          >
+            <ContainerPokemon>
+              <NumberText>
+                <Icon name="hash" size={24} color="#666360" />
+                {pokemon.pokeId}
+              </NumberText>
+              <PokeImage source={{ uri: pokemon.pokeImg }} />
+            </ContainerPokemon>
+
+            <PokemonNameContainer>
+              <PokemonName>Name: </PokemonName>
+              <PokemonNameText>{pokemon.name}</PokemonNameText>
+            </PokemonNameContainer>
+          </PokemonListContainer>
+        )}
       />
     </Container>
   );
