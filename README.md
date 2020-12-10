@@ -6,12 +6,8 @@
 <p align="center">🚀 Create native apps for Android and iOS using React</p>
 
 
-![TELA PRINCIPAL](https://user-images.githubusercontent.com/67912493/101778077-21d3bd80-3ad2-11eb-8650-b9cca4bb1605.png)
-
-![PESQUISA](https://user-images.githubusercontent.com/67912493/101778000-0799df80-3ad2-11eb-8f03-c39cf51b5e21.png)
-
-
-![STATS](https://user-images.githubusercontent.com/67912493/101778063-1c767300-3ad2-11eb-87e8-95ffa73077cd.png)
+![TELA PRINCIPAL](https://user-images.githubusercontent.com/67912493/101778572-cb1ab380-3ad2-11eb-8613-87961a8c8d19.png)
+![STATS](https://user-images.githubusercontent.com/67912493/101778578-cd7d0d80-3ad2-11eb-80f7-b4490d5d45c4.png)
 
 
 
