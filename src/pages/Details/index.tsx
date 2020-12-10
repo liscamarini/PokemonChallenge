@@ -1,7 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable prefer-const */
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -51,7 +47,6 @@ interface PokemonDetails {
   pokeImg: string;
   height: number;
   weight: number;
-  stats: number;
 }
 
 interface PokemonStats {
@@ -77,7 +72,7 @@ const Details: React.FC<Pokemon> = () => {
         const evolutionChainUrl = response.data.evolution_chain.url;
 
         const resultChain = await api.get(evolutionChainUrl);
-        let pokeEvolutionList = [];
+        const pokeEvolutionList = [];
 
         const evolutionData = resultChain.data.chain;
 
@@ -192,8 +187,10 @@ const Details: React.FC<Pokemon> = () => {
                 <PokemonNameText>{item.name}</PokemonNameText>
 
                 <ContainerHWItem>
-                  <PokemonWeightText>{item.weight} KG</PokemonWeightText>
-                  <PokemonHeightText>{item.height} M</PokemonHeightText>
+                  <PokemonWeightText>
+{item.weight} KG</PokemonWeightText>
+                  <PokemonHeightText>
+{item.height} M</PokemonHeightText>
                 </ContainerHWItem>
 
                 <ContainerHW>
