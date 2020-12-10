@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable prefer-const */
@@ -56,6 +57,7 @@ interface PokemonDetails {
 interface PokemonStats {
   base: number;
   name: string;
+  progressBase: number;
 }
 
 const Details: React.FC<Pokemon> = () => {
@@ -145,6 +147,7 @@ const Details: React.FC<Pokemon> = () => {
         if (pokeStats) {
           const pokeList = pokeStats.map((stat: any) => ({
             base: stat.base_stat,
+            progressBase: stat.base_stat / 100,
             name: stat.stat.name.toUpperCase(),
           }));
 
@@ -199,10 +202,10 @@ const Details: React.FC<Pokemon> = () => {
                 </ContainerHW>
               </View>
 
-              {stats.map(stat => (
+              {stats.map(item => (
                 <ContainerStats>
-                  <PokemonStatsText>{stat.name}</PokemonStatsText>
-                  <PokemonStats>{stat.base}</PokemonStats>
+                  <PokemonStatsText>{item.name}</PokemonStatsText>
+                  <PokemonStats>{item.base}</PokemonStats>
                   <ContainerProgressBar>
                     <ProgressBar
                       styleAttr="Horizontal"
@@ -212,7 +215,7 @@ const Details: React.FC<Pokemon> = () => {
                       borderRadius={10}
                       borderWidth={10}
                       indeterminate={false}
-                      progress={0.45}
+                      progress={item.progressBase}
                     />
                   </ContainerProgressBar>
                 </ContainerStats>
