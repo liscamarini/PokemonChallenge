@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
+import { View } from 'react-native';
 import {
   Container,
   Header,
@@ -12,7 +14,6 @@ import {
   ContainerPokemon,
   NumberText,
   PokeImage,
-  PokemonName,
   PokemonNameContainer,
   PokemonNameText,
 } from './styles';
@@ -42,7 +43,7 @@ const Home: React.FC<Pokemon> = () => {
         const pokeData = response.data.results;
         if (pokeData) {
           const pokemonList = pokeData.map((poke: any, id: number) => ({
-            name: poke.name,
+            name: poke.name.toUpperCase(),
             pokeId: id + 1,
             pokeImg: `https://pokeres.bastionbot.org/images/pokemon/${
               id + 1
@@ -53,7 +54,7 @@ const Home: React.FC<Pokemon> = () => {
         } else {
           const pokeFakeList = [
             {
-              name: response.data.name,
+              name: response.data.name.toUpperCase(),
               pokeId: response.data.id,
               pokeImg: `https://pokeres.bastionbot.org/images/pokemon/${response.data.id}.png`,
             },
@@ -100,18 +101,19 @@ const Home: React.FC<Pokemon> = () => {
           <PokemonListContainer
             onPress={() => navigateToDetails(pokemon.pokeId)}
           >
-            <ContainerPokemon>
-              <NumberText>
-                <Icon name="hash" size={24} color="#666360" />
-                {pokemon.pokeId}
-              </NumberText>
-              <PokeImage source={{ uri: pokemon.pokeImg }} />
-            </ContainerPokemon>
+            <View style={{ alignItems: 'center' }}>
+              <ContainerPokemon>
+                <NumberText>
+                  <Icon name="hash" size={24} color="#666360" />
+                  {pokemon.pokeId}
+                </NumberText>
+                <PokeImage source={{ uri: pokemon.pokeImg }} />
+              </ContainerPokemon>
 
-            <PokemonNameContainer>
-              <PokemonName>Name: </PokemonName>
-              <PokemonNameText>{pokemon.name}</PokemonNameText>
-            </PokemonNameContainer>
+              <PokemonNameContainer>
+                <PokemonNameText>{pokemon.name}</PokemonNameText>
+              </PokemonNameContainer>
+            </View>
           </PokemonListContainer>
         )}
       />

@@ -36,30 +36,26 @@ export const PokemonList = styled(FlatList as new () => FlatList<Pokemon>)`
 export const PokemonListContainer = styled.TouchableOpacity`
   width: 100%;
   height: 300px;
-  margin-right: 16px;
   background: #3e3b47;
   border-radius: 8px;
   margin-top: 16px;
 `;
 export const ContainerPokemon = styled.View`
   flex-direction: row;
-  margin-right: 16px;
+  padding: 16px 32px 16px;
 `;
 
 export const NumberText = styled.Text`
   font-family: 'Roboto-Medium';
   font-size: 24px;
   color: #666360;
-  margin-top: 16px;
-  margin-right: 26px;
 `;
 export const PokeImage = styled.Image`
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
 `;
 export const PokemonNameContainer = styled.View`
   flex-direction: row;
-  margin-top: 16px;
 `;
 
 export const PokemonName = styled.Text`
