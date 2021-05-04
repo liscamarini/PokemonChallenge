@@ -187,10 +187,14 @@ const Details: React.FC<Pokemon> = () => {
                 <PokemonNameText>{item.name}</PokemonNameText>
 
                 <ContainerHWItem>
-                  <PokemonWeightText>
-{item.weight} KG</PokemonWeightText>
-                  <PokemonHeightText>
-{item.height} M</PokemonHeightText>
+                  <PokemonWeightText>{item.weight}
+                    {' '}
+KG
+</PokemonWeightText>
+                  <PokemonHeightText>{item.height}
+                    {' '}
+M
+</PokemonHeightText>
                 </ContainerHWItem>
 
                 <ContainerHW>
